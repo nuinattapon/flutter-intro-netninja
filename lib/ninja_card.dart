@@ -46,19 +46,19 @@ class App extends StatelessWidget {
       title: 'นินจา ID',
       // onGenerateRoute: _routes(),
       theme: _theme(),
-      home: Home(),
+      home: NinjaCard(),
     );
   }
 }
 
-class Home extends StatefulWidget {
-  const Home({Key key}) : super(key: key);
+class NinjaCard extends StatefulWidget {
+  const NinjaCard({Key key}) : super(key: key);
 
   @override
-  _HomeState createState() => _HomeState();
+  _NinjaCardState createState() => _NinjaCardState();
 }
 
-class _HomeState extends State<Home> {
+class _NinjaCardState extends State<NinjaCard> {
   final Color textColor = TextColorDark;
   final double hPad = 8.0;
   final double vPad = 8.0;
