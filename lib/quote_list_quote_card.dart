@@ -91,7 +91,18 @@ class _QuoteListState extends State<QuoteList> {
           child: Column(
             // crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              ...quotes.map((quote) => QuoteCard(quote: quote)).toList(),
+              ...quotes
+                  .map(
+                    (quote) => QuoteCard(
+                      quote: quote,
+                      delete: () {
+                        setState(() {
+                          quotes.remove(quote);
+                        });
+                      },
+                    ),
+                  )
+                  .toList(),
             ],
           ),
         ),
@@ -102,8 +113,8 @@ class _QuoteListState extends State<QuoteList> {
 
 class QuoteCard extends StatelessWidget {
   final Quote quote;
-
-  const QuoteCard({this.quote});
+  final Function delete;
+  QuoteCard({this.quote, this.delete});
 
   @override
   Widget build(BuildContext context) {
@@ -112,13 +123,12 @@ class QuoteCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
               quote.text,
               style: TextStyle(
-                fontSize: 14.0,
-                fontWeight: FontWeight.w400,
+                fontSize: 16.0,
                 color: Colors.grey[600],
               ),
             ),
@@ -126,10 +136,17 @@ class QuoteCard extends StatelessWidget {
             Text(
               quote.author,
               style: TextStyle(
-                fontSize: 12.0,
+                fontSize: 14.0,
                 color: Colors.grey[800],
               ),
             ),
+            SizedBox(height: 2.0),
+            FlatButton.icon(
+              icon: Icon(Icons.delete, size: 16.0, color: Colors.grey[600]),
+              label: Text('delete',
+                  style: CaptionTextStyle.copyWith(color: Colors.grey[800])),
+              onPressed: delete,
+            )
           ],
         ),
       ),
