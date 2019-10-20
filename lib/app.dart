@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './style.dart';
 import './models/quote.dart';
+import 'pages/home.dart';
 
 class App extends StatelessWidget {
   // RouteFactory _routes() {
@@ -44,7 +45,7 @@ class App extends StatelessWidget {
       title: 'QuoteList',
       // onGenerateRoute: _routes(),
       theme: _theme(),
-      home: QuoteList(),
+      home: Home(),
     );
   }
 }
