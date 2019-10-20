@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
 
-class ChooseLocation extends StatelessWidget {
-  // const ChooseLocation({Key key}) : super(key: key);
+class ChooseLocation extends StatefulWidget {
+  @override
+  _ChooseLocationState createState() => _ChooseLocationState();
+}
 
+class _ChooseLocationState extends State<ChooseLocation> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: null,
-    );
+    return Scaffold(
+        // appBar: AppBar(
+        //   title: Text('Awesome Quotes'),
+        //   centerTitle: true,
+        // backgroundColor: Colors.red[800],
+        // ),
+        body: SafeArea(
+      child: Text('Home'),
+    ));
   }
 }
