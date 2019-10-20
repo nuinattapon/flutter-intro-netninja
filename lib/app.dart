@@ -34,7 +34,7 @@ class App extends StatelessWidget {
         caption: CaptionTextStyle,
         body1: Body1TextStyle,
       ),
-      primarySwatch: Colors.amber,
+      primarySwatch: Colors.blue,
       fontFamily: 'Kanit',
     );
   }
@@ -51,6 +51,7 @@ class App extends StatelessWidget {
         '/location': (context) => ChooseLocation(),
       },
       theme: _theme(),
+      initialRoute: '/',
     );
   }
 }
