@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 const LargeTextSize = 22.0;
-const MediumTextSize = 18.0;
+const MediumTextSize = 14.0;
 const SmallTextSize = 12.0;
 
 const String FontNameDefault = 'Kanit';
