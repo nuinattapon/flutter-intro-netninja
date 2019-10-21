@@ -35,7 +35,7 @@ class App extends StatelessWidget {
         body1: Body1TextStyle,
       ),
       primarySwatch: Colors.blue,
-      fontFamily: 'Kanit',
+      fontFamily: FontNameDefault,
     );
   }
 

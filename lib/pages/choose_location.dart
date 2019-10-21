@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../services/world_time.dart';
 
 class ChooseLocation extends StatefulWidget {
   @override
@@ -6,80 +7,68 @@ class ChooseLocation extends StatefulWidget {
 }
 
 class _ChooseLocationState extends State<ChooseLocation> {
-  int counter = 0;
+  List<WorldTime> locations = [
+    WorldTime(url: 'Europe/London', location: 'ลอนดอน', flag: 'uk.png'),
+    WorldTime(url: 'Europe/Berlin', location: 'Athens', flag: 'greece.png'),
+    WorldTime(url: 'Africa/Cairo', location: 'Cairo', flag: 'egypt.png'),
+    WorldTime(url: 'Africa/Nairobi', location: 'Nairobi', flag: 'kenya.png'),
+    WorldTime(url: 'America/Chicago', location: 'Chicago', flag: 'usa.png'),
+    WorldTime(url: 'America/New_York', location: 'New York', flag: 'usa.png'),
+    WorldTime(url: 'Asia/Seoul', location: 'Seoul', flag: 'south_korea.png'),
+    WorldTime(url: 'Asia/Jakarta', location: 'Jakarta', flag: 'indonesia.png'),
+    WorldTime(url: 'Asia/Bangkok', location: 'กรุงเทพ', flag: 'thailand.jpg'),
+  ];
 
-  void getData() async {
-    // Simuulate network request for a username
-    String username = await Future.delayed(
-      Duration(seconds: 3),
-      () {
-        return 'yoshi';
-      },
-    );
-    // Simuulate network request for a bio
-    String bio = await Future.delayed(
-      Duration(seconds: 2),
-      () {
-        return 'vegan, musician && egg collector';
-      },
-    );
-    print('getData function ran: $username - $bio');
+  void updateTime(index) async {
+    WorldTime instance = locations[index];
+    print(instance.location);
+
+    await instance.getTime();
+    Navigator.pop(context, {
+      'location': instance.location,
+      'time': instance.time,
+      'flag': instance.flag,
+      'isDaytime': instance.isDaytime,
+    });
   }
 
   @override
   void initState() {
     super.initState();
-    print('initState function ran');
-    getData();
-    print('initState function finished');
   }
 
   @override
   Widget build(BuildContext context) {
-    print('build function ran');
-
     return Scaffold(
-        backgroundColor: Colors.grey[200],
-        appBar: AppBar(
-          title: Text('Awesome Quotes'),
-          centerTitle: true,
-          backgroundColor: Colors.blue[900],
-          elevation: 0.0,
-        ),
-        body: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text('Counter is $counter'),
+      backgroundColor: Colors.grey[200],
+      appBar: AppBar(
+        title: Text('กรุณาเลือกตำแหน่ง'),
+        centerTitle: true,
+        backgroundColor: Colors.blue[900],
+        elevation: 0.0,
+      ),
+      body: SafeArea(
+        child: ListView.builder(
+          itemCount: locations.length,
+          itemBuilder: (context, index) {
+            return Card(
+              child: Container(
+                color: Colors.grey[50],
+                child: ListTile(
+                  onTap: () {
+                    updateTime(index);
+                  },
+                  title: Text(locations[index].location),
+                  leading: CircleAvatar(
+                    backgroundImage:
+                        AssetImage('assets/images/${locations[index].flag}'),
+                  ),
                 ),
               ),
-              Center(
-                child: RaisedButton(
-                  child: Text(
-                    'Counter is $counter',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      counter += 1;
-                    });
-                  },
-                  color: Colors.blue[900],
-                  shape: RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(18.0),
-                    // side: BorderSide(
-                    //   color: Colors.blue[900],
-                    //   width: 1,
-                    // ),
-                  ),
-                ),
-              )
-            ],
-          ),
-        ));
+            );
+          },
+        ),
+      ),
+    );
   }
 }

@@ -4,7 +4,7 @@ const LargeTextSize = 22.0;
 const MediumTextSize = 14.0;
 const SmallTextSize = 12.0;
 
-const String FontNameDefault = 'Kanit';
+const String FontNameDefault = 'Trirong';
 
 const Color TextColorDark = Colors.black;
 const Color TextColorLight = Colors.white;
